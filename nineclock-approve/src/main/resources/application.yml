@@ -1,0 +1,50 @@
+server:
+  port: 8086
+spring:
+  application:
+    name: approve-service
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.12.128:3306/nineclock_approve?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC
+    username: root
+    password: 123456
+  data:
+    mongodb:
+      host: 192.168.12.128
+      port: 27017
+      database: nineclock
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.12.128:8848
+  main:
+    allow-bean-definition-overriding: true
+
+
+  #activiti 配置
+  activiti:
+    database-schema-update: true
+    db-history-used: true
+    history-level: full
+    check-process-definitions: false
+    use-strong-uuids: false
+    deployment-mode:  never-fail
+  jackson:
+    serialization: {WRITE_DATES_AS_TIMESTAMPS: true}
+
+mybatis-plus:
+  type-aliases-package: com.nineclock.approve.pojo
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      id-type: uuid
+
+logging:
+  level:
+    com.nineclock: debug
+    org.activiti.engine.impl.persistence.entity: trace
+nineclock:
+  auth:
+    signKey: C7B644C6F24526A820DE800DED2608ED

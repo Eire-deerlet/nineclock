@@ -1,0 +1,29 @@
+server:
+  port: 8084
+spring:
+  application:
+    name: document-service
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.12.128:3306/nineclock_doc?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false
+    username: root
+    password: 123456
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.12.128:8848
+  main:
+    allow-bean-definition-overriding: true
+
+mybatis-plus:
+  type-aliases-package: com.nineclock.document.pojo
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+logging:
+  level:
+    com.nineclock: debug
+
+nineclock:
+  auth:
+    signKey: C7B644C6F24526A820DE800DED2608ED

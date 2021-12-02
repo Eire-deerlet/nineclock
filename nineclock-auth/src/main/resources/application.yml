@@ -1,0 +1,34 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: auth-service
+
+  redis:
+    host: 192.168.12.128
+    port: 6379
+
+
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.12.128:3306/nineclock_auth?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false
+    username: root
+    password: 123456
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.12.128:8848
+  main:
+    allow-bean-definition-overriding: true
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    com.itheima: debug
+
+nineclock:
+  auth:
+    #jwt密钥
+    signKey: C7B644C6F24526A820DE800DED2608ED

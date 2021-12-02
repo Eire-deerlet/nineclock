@@ -1,0 +1,28 @@
+server:
+  port: 8084
+spring:
+  application:
+    name: message-service
+  data:
+    mongodb:
+      host: 192.168.12.128
+      port: 27017
+      database: nineclock
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.12.128:8848
+  jackson:
+    serialization: { WRITE_DATES_AS_TIMESTAMPS: true } #转json时, 将date类型转为时间戳
+
+nineclock:
+  auth:
+    signKey: C7B644C6F24526A820DE800DED2608ED
+  jpush:
+    #极光平台应用的唯一标识 ----> APP中集成的就是该appKey（必须使用这个）
+    appKey: 6aca5acdfb171a73ae4c5225
+    #用于服务器端 API 调用时与 AppKey 配合使用达到鉴权的目的（必须使用这个）
+    masterSecret: 0fea2d27d800930a11b10610
+
+rocketmq:
+  name-server: 192.168.12.128:9876

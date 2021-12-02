@@ -1,0 +1,66 @@
+server:
+  port: 8083
+spring:
+  redis:
+    host: 192.168.12.128
+    port: 6379
+
+  application:
+    name: sys-service
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.12.128:3306/nineclock_sys?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false
+    username: root
+    password: 123456
+  cloud:
+    nacos:
+      discovery:
+        # 注册中心地址
+        server-addr: 192.168.12.128:8848
+  servlet:
+    multipart:
+      # 文件上传，最大限制，1024 * 1024 = 1M
+      max-file-size: 10485760
+
+mybatis-plus:
+  # 返回值别名包路径
+  type-aliases-package: com.nineclock.system.pojo
+  configuration:
+    # 返回值字段下划线转驼峰
+    map-underscore-to-camel-case: true
+    # 输出sql语句
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+logging:
+  level:
+    # 设置日志级别
+    com.nineclock: debug
+
+nineclock:
+  auth:
+    signKey: C7B644C6F24526A820DE800DED2608ED
+
+aliyun:
+  sms:
+    accessKeyId: LTAINs6bfRqh2vAL
+    accessKeySecret: BaZMlF9Sr2xdUYtCKaQhhuYKxvlAha
+    signName: 黑马
+    TemplateCode: SMS_215340021
+
+  oss:
+    accessKeyId: LTAI5tCcaQt31UFGFMfEvYGV
+    accessKeySecret: XewOUDcKA3kWqjwaqjhQvgcdUt0GHn
+    bucketName: nineclock9
+    endpoint: oss-cn-guangzhou.aliyuncs.com
+    host: nineclock9.oss-cn-guangzhou.aliyuncs.com
+
+rocketmq:
+  name-server: 192.168.12.128:9876 # 指定命名服务地址
+  producer:
+    group: nineclock-group
+
+huanxin:
+  orgName: 1142211126116972
+  appName: nineclock
+  clientId: YXA6AzxxKq68SYiGFyonJHjI8Q
+  clientSecret: YXA6r0HS1HIxe7Yr6owYxN80BIkpkZI

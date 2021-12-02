@@ -1,0 +1,59 @@
+server:
+  port: 10010
+spring:
+  application:
+    name: gateway-service # 微服务名称
+  cloud:
+    nacos:
+      discovery:
+        # nacos注册中心地址，因为需要拉取服务列表，进行路由转发
+        server-addr: 192.168.12.128:8848
+    gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*" #允许任何域名访问该服务
+            allowedHeaders: "*" #允许携带的请求头
+            allowedMethods: #支持的请求方式
+              - GET
+              - POST
+              - DELETE
+              - PUT
+              - OPTIONS
+
+      routes:
+        - id: sys-service # 微服务名称
+          uri: lb://sys-service # 即sys-service服务的负载均衡地址
+          predicates: # predicates用于匹配HTTP请求的不同属性
+            - Path=/sys/** # 匹配到的URL地址
+          filters:
+            - StripPrefix=1 # 在转发之前将/sys 去掉
+
+        - id: auth-service #微服务名称
+          uri: lb://auth-service #auth-servicewe微服务名
+          predicates: #predicates用于匹配HTTP请求的不同属性
+            - Path=/auth/** #匹配到的URL地址
+          filters:
+            - StripPrefix=1 #在转发之前将/sys去掉
+
+        - id: document-service
+          uri: lb://document-service
+          predicates:
+            - Path=/document/**
+          filters:
+            - StripPrefix=1
+
+        - id: attendance-service # 唯一标识
+          uri: lb://attendance-service # 考勤微服务
+          predicates:
+            - Path=/atte/** # 断言和url进行匹配
+          filters:
+            - StripPrefix=1 # 去除一个前缀
+
+
+        - id: approve-service
+          uri: lb://approve-service #审批微服务
+          predicates:
+            - Path=/approve/**
+          filters:
+            - StripPrefix=1

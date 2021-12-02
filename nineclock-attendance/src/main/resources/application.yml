@@ -1,0 +1,63 @@
+server:
+  port: 8085
+spring:
+  application:
+    name: attendance-service
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.12.128:3306/nineclock_attendence?useUnicode=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false
+    username: root
+    password: 123456
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.12.128:8848
+  servlet:
+    multipart:
+      max-file-size: 10485760
+  main:
+    allow-bean-definition-overriding: true
+
+  mail:
+    host: smtp.qq.com
+    protocol: smtp
+    username: 2635610020@qq.com
+    password: dvqwipchhcsmeabh
+    port:
+    default-encoding: UTF-8
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+      mail.smtp.starttls.required: true
+      mail.smtp.socketFactory.port: 465
+      mail.smtp.socketFactory.class: javax.net.ssl.SSLSocketFactory
+      mail.smtp.socketFactory.fallback: false
+
+mybatis-plus:
+  type-aliases-package: com.nineclock.attendance.pojo
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+logging:
+  level:
+    com.nineclock: debug
+
+nineclock:
+  auth:
+    signKey: C7B644C6F24526A820DE800DED2608ED
+
+
+#Xxl-job 分布式任务调度配置
+xxl:
+  job:
+    admin:
+      addresses: http://192.168.12.128:8999/xxl-job-admin
+    executor:
+      appname: xxl-job-executor-nineclock
+      address:
+      ip:
+      port: 1234
+      logpath: /data/applogs/xxl-job/jobhandler
+      logretentiondays: 30
+    accessToken:
